@@ -75,11 +75,11 @@ $(document).ready(function () {
     ]
 
 
-    var srcimage = "images/etoile.png";
+
     for(var i=0;i<rows;i++)
     {
         var idrow = "player-r"+ String(i)
-        var row = Layoutboardplayer.append("<div class=\"row\" id=\"" + idrow +"\">");
+        var row = Layoutboardplayer.append("<div class=\" justify-content-center row\" id=\"" + idrow +"\">");
         
         for(var j=0;j<cols;j++)
         {
@@ -115,8 +115,8 @@ function movepiece(event)
 {
 
     var colrow = event.target.getAttribute("id");
-    var row =  parseInt(colrow.slice(1,3)/7);
-    var col = colrow.slice(1,3)%7;
+    var row =  parseInt(colrow.slice(1,3)/rows);
+    var col = colrow.slice(1,3)%rows;
     if(board[row*rows+col].isPlayable)
     {
         if(choosenBoxes.length == 0)
@@ -138,11 +138,11 @@ function movepiece(event)
                 choosenBoxes = [];
                   if (checkForLose())
                   {
-
+                    
                   }
                   if (checkForWin())
                   {
-                      
+
                   }
                 
             }

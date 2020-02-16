@@ -24,3 +24,10 @@
     background-size: auto;
     border: 2px solid black;
 }
+
+.pied
+{
+    background-color: royalblue;
+    text-align: center;
+    color : whitesmoke;
+}
