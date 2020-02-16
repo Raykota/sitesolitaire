@@ -1,0 +1,26 @@
+.box {
+    width: 3em;
+    height: 3em;
+
+}
+
+.boxfull
+{
+    background-image: url("images/etoile.png");
+    background-size: auto;
+    border: 2px solid black;
+}
+.boxselected
+{
+    background-image: url("images/etoile.png");
+    background-size: auto;
+    border: 2px solid red;
+}
+
+
+.boxempty
+{
+    background-image: url('images/emptycase.png');
+    background-size: auto;
+    border: 2px solid black;
+}
