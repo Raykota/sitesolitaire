@@ -130,8 +130,8 @@ function movepiece(event)
         {
             choosenBoxes.push(board[rows*row+col]);
             board[rows*row+col].selectedIt();
-        }else
-        {
+        }
+        else{
             if(choosenBoxes.length == 1)
             {
                 choosenBoxes.push(board[rows*row+col]);
@@ -144,22 +144,26 @@ function movepiece(event)
                     points -=20;
                 }
                 choosenBoxes = [];
-                  if (checkForLose())
-                  {
-                    points -=2000;
-                    clearInterval(showPoint);
-                    clearInterval(timer);
-                    $("#victoryordefeat").html("Défaite !!!!!!");
-                    $("#windowresult").css("display","block");
-                  }
-                  if (checkForWin())
-                  {
-                    points += 1000;
-                    clearInterval(showPoint);
-                    clearInterval(timer);
-                    $("#Victoire !! Bravo !!");
-                    $("#windowresult").css("display","block");
-                  }
+                if (checkForWin())
+                {
+                  points += 1000;
+                  clearInterval(showPoint);
+                  clearInterval(timer);
+                  $("#victoryordefeat").html("Victoire !! Bravo !!");
+                  $("#windowresult").css("display","block");
+                }else if (checkForLose())
+
+                    {
+                      points -=2000;
+                      clearInterval(showPoint);
+                      clearInterval(timer);
+                      $("#victoryordefeat").html("Défaite !!!!!!");
+                      $("#windowresult").css("display","block");
+                    }
+  
+                
+                
+
                 
             }
     }

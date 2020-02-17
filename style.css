@@ -66,11 +66,16 @@
 #victoryordefeat
 {
 
-    font-size : 10em;
+    font-size : 8em;
     color: coral;
 }
 
 .scoresoption
 {
-    font: 
+    font-size: 3em;
+}
+
+#result
+{
+    border: 5px solid grey;
 }
