@@ -137,16 +137,9 @@ var rows = 0;
 var cols = 0;
 var chest = 0;
 var mask = 0;
-
-function chooseBoard(event)
-{
-    
-}
+var object = 0;
 
 choosenBoxes = [];
-
-
-var object = new Mask();
 
 var sec =0;
 var min =0;
@@ -154,18 +147,51 @@ var min =0;
 var board = [];
 var idx;
 
-
-
-
 var points = 10000;
-var  timer;
+var  timer = 0;
 var showpoint;
 
-$(document).ready(function () {
-    
+var lauchtimer = 0;
 
-    
+function chooseBoard(event)
+{
+
+    object = new Mask();
+    switch(event.target.id)
+    {
+        case 'english':
+            chest = object.English();
+            break;
+        case 'diamant':
+            chest = object.Diamant();
+            break;
+        case 'european':
+            chest=object.European();
+            break;
+        case 'asymetric':
+            chest = object.Asymetric();
+            break;
+        case 'deutch':
+            chest = object.Deutch();
+            break;
+
+        default:
+            chest = object.English();
+            break;
+    }
+
+
+    cols = object.col;
+    rows = object.row;
+    mask = object.mask;
+    board = [];
+    choosenBoxes = [];
+    idx=0;
+    $("#windowresult").css("display","none");
+
     var Layoutboardplayer = $("#layoutplayer");
+    Layoutboardplayer.empty();
+
     var layoutboard = Layoutboardplayer.append("<div>");
     layoutboard.attr("class","container");
 
@@ -202,12 +228,45 @@ $(document).ready(function () {
 
                     break;
                 
+                
             }
         }
     }
     $(".timer").html("[ 0 min 0 sec]");
-timer = setInterval(horloge,1000);
-showpoint = setInterval(showPoint,500);
+
+points = 10000;
+sec =0;
+min = 0;
+
+if(!lauchtimer)
+{
+
+    showpoint = setInterval(showPoint,50);
+    timer = setInterval(horloge,1000);
+    lauchtimer =1;
+}
+
+}
+
+
+
+
+
+
+
+$(document).ready(function () {
+    
+
+    $("#english").on("click",chooseBoard);
+    $("#european").on("click",chooseBoard);
+    $("#deutch").on("click",chooseBoard);
+    $("#diamant").on("click",chooseBoard);
+    $("#asymetric").on("click",chooseBoard);
+    $("#buttonrestart").on("click",chooseBoard);
+
+
+
+    
 });
 
 function movepiece(event)
@@ -243,6 +302,7 @@ function movepiece(event)
                   clearInterval(timer);
                   $("#victoryordefeat").html("Victoire !! Bravo !!");
                   $("#windowresult").css("display","block");
+                  lauchtimer=0;
                 }else if (checkForLose())
 
                     {
@@ -251,6 +311,7 @@ function movepiece(event)
                       clearInterval(timer);
                       $("#victoryordefeat").html("Défaite !!!!!!");
                       $("#windowresult").css("display","block");
+                      lauchtimer=0;
                     }
   
                 

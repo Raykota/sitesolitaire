@@ -30,6 +30,10 @@
     background-color: royalblue;
     text-align: center;
     color : whitesmoke;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 .tete
@@ -78,4 +82,15 @@
 #result
 {
     border: 5px solid grey;
+}
+
+.bordercol
+{
+    border: 2px solid royalblue ;
+    font-size:1.5em;
+}
+
+img
+{
+    border:1.5px  solid sandybrown;
 }
