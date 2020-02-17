@@ -49,11 +49,25 @@
 
 choosenBoxes = [];
 
+var sec =0;
+var min =0;
 var rows = 7;
 var cols = 7;
 var board = [];
 var idx;
+var mask = [
+    0,0,1,1,1,0,0,
+    0,0,1,1,1,0,0,
+    1,1,1,1,1,1,1,
+    1,1,1,2,1,1,1,
+    1,1,1,1,1,1,1,
+    0,0,1,1,1,0,0,
+    0,0,1,1,1,0,0
+];
 
+var points = 10000;
+var  timer;
+var showpoint;
 
 $(document).ready(function () {
     
@@ -64,15 +78,6 @@ $(document).ready(function () {
     layoutboard.attr("class","container");
 
 
-    var mask = [
-        0,0,1,1,1,0,0,
-        0,0,1,1,1,0,0,
-        1,1,1,1,1,1,1,
-        1,1,1,2,1,1,1,
-        1,1,1,1,1,1,1,
-        0,0,1,1,1,0,0,
-        0,0,1,1,1,0,0
-    ]
 
 
 
@@ -108,7 +113,9 @@ $(document).ready(function () {
             }
         }
     }
-
+    $("#timer").html("[ 0 min 0 sec]");
+timer = setInterval(horloge,1000);
+showpoint = setInterval(showPoint,500);
 });
 
 function movepiece(event)
@@ -130,19 +137,25 @@ function movepiece(event)
                 choosenBoxes.push(board[rows*row+col]);
                 if(tryMove())
                 {
-
+                    points+=5;
                 }
                 else{
                     choosenBoxes[0].deselectedIt();
+                    points -=20;
                 }
                 choosenBoxes = [];
                   if (checkForLose())
                   {
-                    
+                    points -=2000;
+                    clearInterval(showPoint);
+                    clearInterval(timer);
+                    console.log("loose");
                   }
                   if (checkForWin())
                   {
-
+                    points += 1000;
+                    clearInterval(showPoint);
+                    clearInterval(timer);
                   }
                 
             }
@@ -217,3 +230,23 @@ function isMovable(row1, col1, row2, col2) {
 }
 
 }
+
+function horloge()
+{
+    sec += 1;
+    points -= 15;
+    if (sec ==60)
+    {
+        min +=1;
+        sec=0;
+    }
+
+    $("#timer").html("[ "+min+" min "+sec+" sec]");
+}
+
+
+function showPoint()
+{
+    $("#points").html(points)
+}
+
