@@ -1,69 +1,161 @@
 
 
-    class Box{
+class Box{
 
-        constructor(isEmpty, isPlayable, row, col)
+    constructor(isEmpty, isPlayable, row, col)
+    {
+        this.isEmpty = isEmpty;
+        this.isPlayable = isPlayable;
+        this.row = row;
+        this.col = col; 
+
+    }
+
+        isEmpty()
         {
-            this.isEmpty = isEmpty;
-            this.isPlayable = isPlayable;
-            this.row = row;
-            this.col = col; 
+            return this.isEmpty;
+        }
+        isPlayable()
+        {
+            return this.isPlayable;
+            }
+        emptyIt()
+        {
+            this.isEmpty = true;
+            $("#b"+String(this.row*rows+this.col)).removeClass("boxfull");
+            $("#b"+String(this.row*rows+this.col)).addClass("boxempty");
+            }
+        fillIt()
+        {
+            this.isEmpty = false;
+            $("#b"+String(this.row*rows+this.col)).addClass("boxfull");
+            $("#b"+String(this.row*rows+this.col)).removeClass("boxempty");
+            }
+        selectedIt()
+        {
+            $("#b"+String(this.row*rows+this.col)).removeClass("boxfull");
+            $("#b"+String(this.row*rows+this.col)).addClass("boxselected");
 
         }
+
+        deselectedIt()
+        {
+            $("#b"+String(this.row*rows+this.col)).addClass("boxfull");
+            $("#b"+String(this.row*rows+this.col)).removeClass("boxselected");
+        }
+
+}
+
+
+class Mask{
+
+    European()
+    {
+        this.mask = [0,0,1,1,1,0,0,
+                        0,1,1,1,1,1,0,
+                        1,1,1,1,1,1,1,
+                        1,1,1,2,1,1,1,
+                        1,1,1,1,1,1,1,
+                        0,1,1,1,1,1,0,
+                        0,0,1,1,1,0,0 ];
+        this.row= 7;
+        this.col = 7;
+
+        return this;
+    }
+
+    English()
+    {
+        this.mask = [   0,0,1,1,1,0,0,
+                        0,0,1,1,1,0,0,
+                        1,1,1,1,1,1,1,
+                        1,1,1,2,1,1,1,
+                        1,1,1,1,1,1,1,
+                        0,0,1,1,1,0,0,
+                        0,0,1,1,1,0,0 ];
+        this.row= 7;
+        this.col = 7;
+
+        return this;
+    }
+
+    Asymetric()
+    {
+        this.mask = [   0,0,1,1,1,0,0,0,
+                        0,0,1,1,1,0,0,0,
+                        0,0,1,1,1,0,0,0,
+                        1,1,1,1,1,1,1,1,
+                        1,1,1,2,1,1,1,1,
+                        1,1,1,1,1,1,1,1,
+                        0,0,1,1,1,0,0,0,
+                        0,0,1,1,1,0,0,0 ];
+        this.row= 8;
+        this.col = 8;
+
+        return this;
+    }
+
+    Deutch()
+    {
+        this.mask = [0,0,0,1,1,1,0,0,0,
+                        0,0,0,1,1,1,0,0,0,
+                        0,0,0,1,1,1,0,0,0,
+                        1,1,1,1,1,1,1,1,1,
+                        1,1,1,1,2,1,1,1,1,
+                        1,1,1,1,1,1,1,1,1,
+                        0,0,0,1,1,1,0,0,0,
+                        0,0,0,1,1,1,0,0,0,
+                        0,0,0,1,1,1,0,0,0 ]
+
+        this.row = 9;
+        this.col = 9;
+
+        return this;
+    }
+
+    Diamant()
+    {
+        this.mask =[0,0,0,0,1,0,0,0,0,
+                    0,0,0,1,1,1,0,0,0,
+                    0,0,1,1,1,1,1,0,0,
+                    0,1,1,1,1,1,1,1,0,
+                    1,1,1,1,2,1,1,1,1,
+                    0,1,1,1,1,1,1,1,0,
+                    0,0,1,1,1,1,1,0,0,
+                    0,0,0,1,1,1,0,0,0,
+                    0,0,0,0,1,0,0,0,0 ]
+
+this.row = 9;
+this.col = 9;
+
+return this;
+    }
+
+}
+
+var rows = 0;
+var cols = 0;
+var chest = 0;
+var mask = 0;
+
+function chooseBoard(event)
+{
     
-            isEmpty()
-            {
-                return this.isEmpty;
-            }
-            isPlayable()
-            {
-                return this.isPlayable;
-                }
-            emptyIt()
-            {
-                this.isEmpty = true;
-                $("#b"+String(this.row*rows+this.col)).removeClass("boxfull");
-                $("#b"+String(this.row*rows+this.col)).addClass("boxempty");
-                }
-            fillIt()
-            {
-                this.isEmpty = false;
-                $("#b"+String(this.row*rows+this.col)).addClass("boxfull");
-                $("#b"+String(this.row*rows+this.col)).removeClass("boxempty");
-                }
-            selectedIt()
-            {
-                $("#b"+String(this.row*rows+this.col)).removeClass("boxfull");
-                $("#b"+String(this.row*rows+this.col)).addClass("boxselected");
-
-            }
-
-            deselectedIt()
-            {
-                $("#b"+String(this.row*rows+this.col)).addClass("boxfull");
-                $("#b"+String(this.row*rows+this.col)).removeClass("boxselected");
-            }
-
-        }
-
+}
 
 choosenBoxes = [];
 
+
+var object = new Mask();
+
 var sec =0;
 var min =0;
-var rows = 7;
-var cols = 7;
+
 var board = [];
 var idx;
-var mask = [
-    0,0,1,1,1,0,0,
-    0,0,1,1,1,0,0,
-    1,1,1,1,1,1,1,
-    1,1,1,2,1,1,1,
-    1,1,1,1,1,1,1,
-    0,0,1,1,1,0,0,
-    0,0,1,1,1,0,0
-];
+
+
+
 
 var points = 10000;
 var  timer;
@@ -84,7 +176,7 @@ $(document).ready(function () {
     for(var i=0;i<rows;i++)
     {
         var idrow = "player-r"+ String(i)
-        var row = Layoutboardplayer.append("<div class=\" justify-content-center row\" id=\"" + idrow +"\">");
+        Layoutboardplayer.append("<div class=\" justify-content-center row\" id=\"" + idrow +"\">");
         
         for(var j=0;j<cols;j++)
         {
