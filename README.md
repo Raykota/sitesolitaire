@@ -25,6 +25,12 @@ Le **seul** type de victoire est qu'il doit rester un seul pion.
 - Nicolas Brosseau : Développeur de l'algorithme du solitaire et de sa généralisation (utilisation sommaire d'un design pattern : *strategy*)
 - Quentin Canovas : Développeur de l'affichage du jeu grâce au framework **Bootstrapt**, du langage **JQuery**.
 
+
+**Technologies utilisées :**
+
+La technologie utilisée principalement est le **Javascript**, et le module **JQuery**. Pour l'affichage, c'est du **HTML/CSS** en utilisant le framework **Bootstrap**. Le serveur est en **Node.js** avec le module **Express**.
+
+
 **Bugs repérés par l'équipe :**
 
 1. Une page non-reponsive
