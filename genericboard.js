@@ -113,7 +113,7 @@ $(document).ready(function () {
             }
         }
     }
-    $("#timer").html("[ 0 min 0 sec]");
+    $(".timer").html("[ 0 min 0 sec]");
 timer = setInterval(horloge,1000);
 showpoint = setInterval(showPoint,500);
 });
@@ -149,13 +149,16 @@ function movepiece(event)
                     points -=2000;
                     clearInterval(showPoint);
                     clearInterval(timer);
-                    console.log("loose");
+                    $("#victoryordefeat").html("Défaite !!!!!!");
+                    $("#windowresult").css("display","block");
                   }
                   if (checkForWin())
                   {
                     points += 1000;
                     clearInterval(showPoint);
                     clearInterval(timer);
+                    $("#Victoire !! Bravo !!");
+                    $("#windowresult").css("display","block");
                   }
                 
             }
@@ -241,12 +244,12 @@ function horloge()
         sec=0;
     }
 
-    $("#timer").html("[ "+min+" min "+sec+" sec]");
+    $(".timer").html("[ "+min+" min "+sec+" sec]");
 }
 
 
 function showPoint()
 {
-    $("#points").html(points)
+    $(".points").html(points)
 }
 
